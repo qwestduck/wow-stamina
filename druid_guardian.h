@@ -2,31 +2,30 @@
 #define DRUID_GUARDIAN_H
 
 #include <math.h>
-#include "spec.h"
 #include "priest.h"
-
-#define DRUID_GUARDIAN_BASE_STAMINA 115.0
 
 #define BEAR_FORM_X 1.4
 #define LEATHER_SPEC_X 1.05
 #define HOTW_X 1.06
 
-class DruidGuardian: public Spec {
+class DruidGuardian: public HealthSource {
   public:
     DruidGuardian() {
       isTalented_hotw = true;
     }
 
-    double getBaseStamina() {
-      return DRUID_GUARDIAN_BASE_STAMINA;
+    DruidGuardian(int _armory_upper_stamina) {
+      isTalented_hotw = true;
+
+      armory_upper_stamina = _armory_upper_stamina;
     }
 
-    double getNonbaseStamina(int armory_nonbase_stamina) {
+    double getUpperStamina() {
       if(isTalented_hotw) {
-        return ((int) ceil( (double) armory_nonbase_stamina / HOTW_X ));
+        return ((int) ceil( (double) armory_upper_stamina / HOTW_X ));
       }
 
-      return armory_nonbase_stamina;
+      return armory_upper_stamina;
     }
 
     double getStamina_X() {
@@ -40,5 +39,6 @@ class DruidGuardian: public Spec {
 
   private:
     bool isTalented_hotw;
+    int armory_upper_stamina;
 };
 #endif
