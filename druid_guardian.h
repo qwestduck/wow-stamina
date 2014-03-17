@@ -22,7 +22,7 @@ class DruidGuardian: public HealthSource {
 
     double getUpperStamina() {
       if(isTalented_hotw) {
-        return ((int) ceil( (double) armory_upper_stamina / HOTW_X ));
+        return ceil( (double) armory_upper_stamina / HOTW_X );
       }
 
       return armory_upper_stamina;
